@@ -29,8 +29,3 @@ D . X . .
 Where H represents a hit, M represents a shot that missed, and X represents a sunken ship.
 
 The Game is over when either the User or Computer sinks both enemy ships
-
-
-
-
-
