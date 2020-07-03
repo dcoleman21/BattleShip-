@@ -1,4 +1,4 @@
-# BattleShip-
+# BattleShip
 
 ## Battleship - Overview
 
