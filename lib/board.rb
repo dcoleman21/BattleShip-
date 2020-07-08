@@ -29,4 +29,11 @@ class Board
     #   return false
     # end ======> works but redundant
   end
+
+  def valid_placement?(ship_object, coordinates)
+    ship_object.length == coordinates.size && valid_coordinate? == true
+    #
+    #coordinates are consectutive
+    #
+  end
 end
