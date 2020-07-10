@@ -25,23 +25,21 @@ class Board
 
   def valid_placement?(ship, coordinates)
     valid_placement_length?(ship, coordinates) &&
-    consecutive_placements?(coordinates) &&
-    # !diagonal_coordinates?(coordinates) &&
-    # !overlap?(ship, coordinates)
-    @cells.values[2].empty?
-    # valid_coordinate?(coordinates)
+    consecutive_placements?(ship, coordinates) &&
+    !diagonal_coordinates?(ship, coordinates) &&
+    !overlap?(ship, coordinates) &&
+    !contains_ship?(ship, coordinates)
   end
 
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
-    # require "pry"; binding.pry
   end
 
   def valid_placement_length?(ship, coordinates)
     ship.length == coordinates.size
   end
 
-  def consecutive_placements?(coordinates)
+  def consecutive_placements?(ship, coordinates)
     letters = coordinates.map do |coordinate|
       coordinate[0].ord
     end
@@ -57,29 +55,34 @@ class Board
     end
   end
 
-  def diagonal_coordinates?(coordinates)
+  def diagonal_coordinates?(ship, coordinates)
     letters = coordinates.map do |coordinate|
       coordinate[0].ord
     end
     numbers = coordinates.map do |coordinate|
       coordinate[-1].to_i
     end
-    letters.uniq.count == 1 || numbers.uniq.count == 1
+    letters.uniq.count == coordinates.count &&
+    numbers.uniq.count == coordinates.count
   end
 
   def place(ship, coordinates)
-    if @cells.values[2].empty?
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
-      end
     end
+  end
+
+  def contains_ship?(ship, coordinates)
+    starts = false
+    coordinates.each do |coordinate|
+      starts = true if @cells[coordinate].empty? == false
+      end
+    starts
   end
 
   def overlap?(ship, coordinates)
     coordinates.any? do |coordinate|
       @cells[coordinate].ship
-      # require "pry"; binding.pry
     end
   end
-
 end
