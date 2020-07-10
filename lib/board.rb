@@ -85,4 +85,12 @@ class Board
       @cells[coordinate].ship
     end
   end
+
+  def render
+    "  1 2 3 4 \n" +
+    "A #{@cells.values[0].render} #{@cells.values[1].render} #{@cells.values[2].render} #{@cells.values[3].render} \n" +
+    "B #{@cells.values[4].render} #{@cells.values[5].render} #{@cells.values[6].render} #{@cells.values[7].render} \n" +
+    "C #{@cells.values[8].render} #{@cells.values[9].render} #{@cells.values[10].render} #{@cells.values[11].render} \n" +
+    "D #{@cells.values[12].render} #{@cells.values[13].render} #{@cells.values[14].render} #{@cells.values[15].render} \n"
+  end
 end

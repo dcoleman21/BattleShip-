@@ -142,5 +142,19 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal true, board.contains_ship?(cruiser, ["A1", "A2", "A3"])
     assert_equal true, board.contains_ship?(cruiser, ["A1", "B1", "C1"])
+    assert_equal false, board.contains_ship?(cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_board_can_render
+    require './lib/board'
+    require './lib/ship'
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", board.render
+
+    # assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n", board.render(true)
   end
 end
