@@ -105,7 +105,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.consecutive_placements?(submarine, ["A1", "C1"])
   end
 
-  def test_can_place_ships
+  def test_place_ships
     board = Board.new
     board.cells
     cruiser = Ship.new("Cruiser", 3)
@@ -123,7 +123,7 @@ class BoardTest < Minitest::Test
     assert_equal true, cell_3.ship == cell_2.ship
   end
 
-  def test_ships_dont_overlap
+  def test_cannot_overlap
     board = Board.new
     board.cells
     cruiser = Ship.new("Cruiser", 3)
@@ -135,7 +135,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.overlap?(submarine, ["B1", "B2"])
   end
 
-  def test_cell_contains_ship
+  def test_contains_ship
     board = Board.new
     board.cells
     cruiser = Ship.new("Cruiser", 3)
