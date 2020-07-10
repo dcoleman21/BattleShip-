@@ -86,11 +86,13 @@ class Board
     end
   end
 
-  def render
-    "  1 2 3 4 \n" +
-    "A #{@cells.values[0].render} #{@cells.values[1].render} #{@cells.values[2].render} #{@cells.values[3].render} \n" +
-    "B #{@cells.values[4].render} #{@cells.values[5].render} #{@cells.values[6].render} #{@cells.values[7].render} \n" +
-    "C #{@cells.values[8].render} #{@cells.values[9].render} #{@cells.values[10].render} #{@cells.values[11].render} \n" +
-    "D #{@cells.values[12].render} #{@cells.values[13].render} #{@cells.values[14].render} #{@cells.values[15].render} \n"
+  def render(show_ship = false)
+
+    show_ship == true
+      "  1 2 3 4 \n" +
+      "A #{@cells.values[0].render(show_ship)} #{@cells.values[1].render(show_ship)} #{@cells.values[2].render(show_ship)} #{@cells.values[3].render(show_ship)} \n" +
+      "B #{@cells.values[4].render(show_ship)} #{@cells.values[5].render(show_ship)} #{@cells.values[6].render(show_ship)} #{@cells.values[7].render(show_ship)} \n" +
+      "C #{@cells.values[8].render(show_ship)} #{@cells.values[9].render(show_ship)} #{@cells.values[10].render(show_ship)} #{@cells.values[11].render(show_ship)} \n" +
+      "D #{@cells.values[12].render(show_ship)} #{@cells.values[13].render(show_ship)} #{@cells.values[14].render(show_ship)} #{@cells.values[15].render(show_ship)} \n"
   end
 end
