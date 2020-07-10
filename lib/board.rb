@@ -23,21 +23,22 @@ class Board
     }
   end
 
-
-  def valid_placement?(ship_object, coordinates)
-    valid_placement_length?(ship_object, coordinates) &&
-    consecutive_placements?(coordinates) ||
-    valid_coordinate?(coordinates)
-  # return true if
-    # true
+  def valid_placement?(ship, coordinates)
+    valid_placement_length?(ship, coordinates) &&
+    consecutive_placements?(coordinates) &&
+    # !diagonal_coordinates?(coordinates) &&
+    # !overlap?(ship, coordinates)
+    @cells.values[2].empty?
+    # valid_coordinate?(coordinates)
   end
 
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
+    # require "pry"; binding.pry
   end
 
-  def valid_placement_length?(ship_object, coordinates)
-    ship_object.length == coordinates.size
+  def valid_placement_length?(ship, coordinates)
+    ship.length == coordinates.size
   end
 
   def consecutive_placements?(coordinates)
@@ -63,21 +64,22 @@ class Board
     numbers = coordinates.map do |coordinate|
       coordinate[-1].to_i
     end
-
     letters.uniq.count == 1 || numbers.uniq.count == 1
   end
 
+  def place(ship, coordinates)
+    if @cells.values[2].empty?
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+      end
+    end
+  end
+
+  def overlap?(ship, coordinates)
+    coordinates.any? do |coordinate|
+      @cells[coordinate].ship
+      # require "pry"; binding.pry
+    end
+  end
+
 end
-
-
-# def consecutive_coordinates?(coordinates)
-#   if same_number?(coordinates) == true && same_letter?(coordinates) == false
-#     true
-#   elsif same_number?(coordinates) == false && same_letter?(coordinates) == true
-#     true
-#   elsif same_number?(coordinates) && same_letter?(coordinates)
-#     false
-#   else
-#     false
-#   end
-# end
