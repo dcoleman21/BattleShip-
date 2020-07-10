@@ -42,12 +42,12 @@ class BoardTest < Minitest::Test
 
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
+    assert_equal true, board.valid_coordinate?("A2")
 
     assert_equal false, board.valid_coordinate?("A5")
     assert_equal false, board.valid_coordinate?("E1")
     assert_equal false, board.valid_coordinate?("A22")
 
-    assert_equal true, board.valid_coordinate?("A2")
   end
 
   def test_ship_length_matches_coordinate_size
@@ -60,7 +60,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement_length?(submarine, ["A2", "A3", "A4"])
   end
 
-  def test_coordinates_are_validly_placed
+  def test_coordinates_have_valid_placement
     board = Board.new
     board.cells
     cruiser = Ship.new("Cruiser", 3)
@@ -160,7 +160,7 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
 
     assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", board.render
-    
+
     assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n", board.render(true)
   end
 end
