@@ -35,4 +35,17 @@ class PlayerTest < Minitest::Test
     assert_equal expected, human.board.cells.keys
   end
 
+  def test_computer_has_ships
+    computer = Player.new("Computer")
+
+    assert_instance_of Ship, computer.cruiser
+    assert_instance_of Ship, computer.submarine
+  end
+
+  def test_human_has_ship
+    human = Player.new("Human")
+
+    assert_instance_of Ship, human.cruiser
+    assert_instance_of Ship, human.submarine
+  end
 end
