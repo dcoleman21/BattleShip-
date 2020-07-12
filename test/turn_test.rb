@@ -27,4 +27,18 @@ class TurnTest < Minitest::Test
     assert_equal 0, turn.human_ships_sunk
   end
 
+  def test_human_can_take_a_shot
+    computer = Player.new("Computer")
+    human = Player.new("Human")
+    turn = Turn.new(computer, human)
+    turn.human_shot
+  end
+
+  def test_computer_can_take_a_shot
+    computer = Player.new("Computer")
+    human = Player.new("Human")
+    turn = Turn.new(computer, human)
+    turn.computer_shot
+  end
+
 end
