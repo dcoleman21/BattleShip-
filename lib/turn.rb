@@ -11,6 +11,13 @@ class Turn
     @human_ships_sunk    = 0
   end
 
+  def display_boards(computer, human)
+    p "=============COMPUTER BOARD============="
+    p @computer.board.render
+    p "==============PLAYER BOARD=============="
+    p @human.board.render(true)
+  end
+
   def human_shot
     loop do
       puts "Enter coordinate to fire upon"
