@@ -1,0 +1,8 @@
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/ship'
+require './lib/cell'
+require './lib/game'
+require './lib/turn'
+require './lib/player'
+require './lib/board'
