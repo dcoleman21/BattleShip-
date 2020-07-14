@@ -12,8 +12,8 @@ class Game
               # :computer_ships_sunk = 0,
               # :human_ships_sunk = 0
   def intialize(computer, human)
-    @player_computer = Player.new
-    @player_human = Player.new
+    @player_computer =
+    @player_human =
     @computer_ships_sunk = 0
     @human_ships_sunk = 0
   end
