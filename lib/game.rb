@@ -117,7 +117,7 @@ class Game
       puts "==============PLAYER BOARD=============="
       puts "#{@human_board.render(true)}"
       # turn.display_boards(computer_player, human_player)
-      binding.pry
+      # binding.pry
       turn.computer_shot
       turn.human_shot
       until @computer_ships_sunk == 2 || @human_ships_sunk == 2
