@@ -66,6 +66,7 @@ class Game
     human_set_up_submarine
     #human sets up their submarine
     new_turn
+    puts "Game Over!"
     # play(computer, human)
     end
   end
@@ -109,18 +110,21 @@ class Game
   end
 
   def new_turn
-    loop do
-      system 'clear'
-      turn = Turn.new(computer_player, human_player)
-      puts "=============COMPUTER BOARD============="
-      puts "#{@computer_board.render}"
-      puts "==============PLAYER BOARD=============="
-      puts "#{@human_board.render(true)}"
-      # turn.display_boards(computer_player, human_player)
-      turn.computer_shot
-      turn.human_shot
-      until @computer_ships_sunk == 2 || @human_ships_sunk == 2
-      end
+    #rename new_turn to take_turn soon
+    system 'clear'
+    turn = Turn.new(computer_player, human_player)
+    puts "=============COMPUTER BOARD============="
+    puts "#{@computer_board.render}"
+    puts "==============PLAYER BOARD=============="
+    puts "#{@human_board.render(true)}"
+    # turn.display_boards(computer_player, human_player)
+    turn.computer_shot
+    turn.human_shot
+
+    if @computer_ships_sunk == 2 || @human_ships_sunk == 2
+       return
+    else
+      new_turn
     end
   end
 
