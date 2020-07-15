@@ -8,9 +8,10 @@ require "pry"
 class Game
 
   attr_reader :computer_player,
-              :human_player
-              # :computer_ships_sunk = 0,
-              # :human_ships_sunk = 0
+              :human_player,
+              :computer_ships_sunk,
+              :human_ships_sunk
+
   def initialize(computer, human)
     @computer_player = computer
     @human_player = human
@@ -38,8 +39,6 @@ class Game
     if input == 'p'
       computer_place_ships
 
-      #computer places ship then human will place theirs
-
     system "clear"
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
           "   ____    _  _____ _____ _     _____ ____  _   _ ___ ____\n" +
@@ -58,23 +57,19 @@ class Game
     sleep(0.8)
     puts "#{@computer_board.render}" +
          "Enter the squares for the Cruiser (3 spaces):"
-    # puts ""
 
     human_set_up_cruiser
 
     puts "#{@human_board.render(true)}" +
     "Enter the squares for the Submarine (2 spaces):"
     human_set_up_submarine
-    #human sets up their submarine
     new_turn
     puts "Game Over!"
-    # play(computer, human)
     end
   end
 
 
   def human_set_up_cruiser
-    # puts "Enter the squares for the Cruiser (3 spaces):"
     cruiser = Ship.new("Cruiser", 3)
     loop do
       input = gets.chomp
@@ -82,8 +77,6 @@ class Game
       cruiser_coords = cruiser_coords.map do |coordinate|
         coordinate.strip()
       end
-       #.strip takes away white space
-      # binding.pry
       if @human_board.valid_placement?(cruiser, cruiser_coords)
         @human_board.place(cruiser, cruiser_coords)
         break
@@ -93,7 +86,6 @@ class Game
   end
 
   def human_set_up_submarine
-    # puts "Enter the squares for the Cruiser (3 spaces):"
     submarine = Ship.new("Submarine", 2)
     loop do
       input = gets.chomp
@@ -101,7 +93,6 @@ class Game
       submarine_coords = submarine_coords.map do |coordinate|
         coordinate.strip()
       end
-      # binding.pry
       if @human_board.valid_placement?(submarine, submarine_coords)
         @human_board.place(submarine, submarine_coords)
         break
@@ -111,41 +102,26 @@ class Game
   end
 
   def new_turn
-    #rename new_turn to take_turn soon
     system 'clear'
     turn = Turn.new(computer_player, human_player)
+    turn.computer_shot
+    sleep(0.8)
     puts "=============COMPUTER BOARD============="
     puts "#{@computer_board.render}"
     puts "==============PLAYER BOARD=============="
     puts "#{@human_board.render(true)}"
-    # turn.display_boards(computer_player, human_player)
-    turn.computer_shot
     puts "Enter coordinate to fire upon"
     player_input = gets.chomp
     turn.human_shot(player_input)
-    #computer shot = H is not rendering to the board
-    #ships sunk is not ending the game
-    
-  #   @computer_ships_sunk += turn.computer_ships_sunk
-  #   @player_ships_sunk += turn.player_ships_sunk
-  #   sleep(0.8)
-  #   if computer_ships_sunk?
-  #     p "You won!"
-  #     turn.display_boards(computer, human)
-  #     break
-  #   elsif player_ships_sunk?
-  #     p "Computer won!"
-  #     turn.display_boards(computer, human)
-  #     break
-  #   else
-  #     new_turn
-  #   end
-  # end
-
-
-
-    if @computer_ships_sunk == 2 || @human_ships_sunk == 2
-       return
+    sleep(0.8)
+    if @computer_player.has_lost?
+      p "You won!"
+      sleep(2.0)
+      self.start
+    elsif @human_player.has_lost?
+      p "Computer won!"
+      sleep(2.0)
+      self.start
     else
       new_turn
     end
@@ -157,20 +133,5 @@ class Game
 
     @computer_board.place(computer_cruiser, ["A1", "A2", "A3"])
     @computer_board.place(computer_submarine, ["C1", "C2"])
-
-    # require "pry"; binding.pry
   end
-
-
 end
-computer_cruiser = Ship.new("Cruiser", 3)
-computer_submarine = Ship.new("Submarine", 2)
-human_cruiser = Ship.new("Cruiser", 3)
-human_submarine = Ship.new("Submarine", 2)
-computer_player = Player.new("Computer")
-human_player = Player.new("Human")
-computer_board = computer_player.board
-human_board = human_player.board
-game = Game.new(computer_player, human_player)
-turn = Turn.new(computer_player, human_player)
-game.start
