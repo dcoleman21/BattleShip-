@@ -18,12 +18,10 @@ class Turn
     p @human.board.render(true)
   end
 
-  def human_shot
+  def human_shot(player_input)
     loop do
-      puts "Enter coordinate to fire upon"
-      player_input = gets.chomp
       if player_input != []
-        if computer.board.valid_coordinate?(player_input) == true
+        if computer.board.valid_coordinate?(player_input)
           if computer.board.cells[player_input].fired_upon? == false
             @computer.board.cells[player_input].fire_upon
             if computer.board.cells[player_input].render(true) == "M"
