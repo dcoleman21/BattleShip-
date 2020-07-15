@@ -1,13 +1,17 @@
 class Player
-  attr_reader :board,
-              :type,
-              :cruiser,
-              :submarine
+  attr_reader :board
 
-  def initialize(player_type)
-    @type      = player_type
+  def initialize
     @board     = Board.new
-    @cruiser   = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
+
+  end
+
+  def has_lost?
+    occupied_cells = @board.cells.find_all do |cell|
+      cell.last.ship
+    end
+    occupied_cells.all? do |cell|
+      cell.last.ship.sunk?
+    end
   end
 end
