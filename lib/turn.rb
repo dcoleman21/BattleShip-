@@ -20,9 +20,7 @@ class Turn
 
   def human_shot(player_input)
     loop do
-      # player_input = gets.chomp
       if player_input != []
-        # require "pry"; binding.pry
         if computer.board.valid_coordinate?(player_input)
           if computer.board.cells[player_input].fired_upon? == false
             @computer.board.cells[player_input].fire_upon

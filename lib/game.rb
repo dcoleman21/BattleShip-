@@ -131,6 +131,7 @@ class Game
     computer_cruiser = Ship.new("Cruiser", 3)
     computer_submarine = Ship.new("Submarine", 2)
 
+    # sub_coords =
     @computer_board.place(computer_cruiser, ["A1", "A2", "A3"])
     @computer_board.place(computer_submarine, ["C1", "C2"])
   end

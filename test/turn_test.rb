@@ -34,7 +34,6 @@ class TurnTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
 
     computer.board.place(cruiser, ["A1", "A2", "A3"])
-    # require "pry"; binding.pry
     turn.human_shot("A1")
   end
 
@@ -43,7 +42,6 @@ class TurnTest < Minitest::Test
     human = Player.new("Human")
     turn = Turn.new(computer, human)
     turn.human_shot("A1")
-
   end
 
   def test_computer_can_take_a_shot
