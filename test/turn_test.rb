@@ -9,16 +9,16 @@ require './lib/turn'
 class TurnTest < Minitest::Test
 
   def test_it_exists
-    computer = Player.new("Computer")
-    human = Player.new("Human")
+    computer = Player.new
+    human = Player.new
     turn = Turn.new(computer, human)
 
     assert_instance_of Turn, turn
   end
 
   def test_it_has_attributes
-    computer = Player.new("Computer")
-    human = Player.new("Human")
+    computer = Player.new
+    human = Player.new
     turn = Turn.new(computer, human)
 
     assert_equal computer, turn.computer
@@ -28,8 +28,8 @@ class TurnTest < Minitest::Test
   end
 
   def test_human_can_hit_a_ship
-    computer = Player.new("Computer")
-    human = Player.new("Human")
+    computer = Player.new
+    human = Player.new
     turn = Turn.new(computer, human)
     cruiser = Ship.new("Cruiser", 3)
 
@@ -38,15 +38,15 @@ class TurnTest < Minitest::Test
   end
 
   def test_human_can_take_a_shot
-    computer = Player.new("Computer")
-    human = Player.new("Human")
+    computer = Player.new
+    human = Player.new
     turn = Turn.new(computer, human)
     turn.human_shot("A1")
   end
 
   def test_computer_can_take_a_shot
-    computer = Player.new("Computer")
-    human = Player.new("Human")
+    computer = Player.new
+    human = Player.new
     turn = Turn.new(computer, human)
     turn.computer_shot
   end

@@ -3,7 +3,6 @@ class Player
 
   def initialize
     @board     = Board.new
-
   end
 
   def has_lost?

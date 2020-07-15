@@ -16,24 +16,12 @@ class GameTest < Minitest::Test
     computer_submarine = Ship.new("Submarine", 2)
     human_cruiser = Ship.new("Cruiser", 3)
     human_submarine = Ship.new("Submarine", 2)
-    computer_player = Player.new("Computer")
-    human_player = Player.new("Human")
-    game = Game.new
-    game.start
-
-    assert_instance_of Board, computer
-    assert_instance_of Board, human
-    assert_instance_of Game, game
-  end
-
-  def test_human_can_set_up_cruiser
-    computer_board = Board.new
-    human_board = Board.new
-    human_cruiser = Ship.new("Cruiser", 3)
-    human_submarine = Ship.new("Submarine", 2)
-    computer_player = Player.new("Computer")
-    human_player = Player.new("Human")
+    computer_player = Player.new
+    human_player = Player.new
     game = Game.new(computer_player, human_player)
-    game.start
+
+    assert_instance_of Board, computer_board
+    assert_instance_of Board, human_board
+    assert_instance_of Game, game
   end
 end
