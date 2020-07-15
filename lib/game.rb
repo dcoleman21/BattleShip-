@@ -68,7 +68,6 @@ class Game
     end
   end
 
-
   def human_set_up_cruiser
     cruiser = Ship.new("Cruiser", 3)
     loop do
@@ -115,12 +114,20 @@ class Game
     turn.human_shot(player_input)
     sleep(0.8)
     if @computer_player.has_lost?
+      puts "=============COMPUTER BOARD============="
+      puts "#{@computer_board.render}"
+      puts "==============PLAYER BOARD=============="
+      puts "#{@human_board.render(true)}"
       p "You won!"
-      sleep(2.0)
+      sleep(5.0)
       self.start
     elsif @human_player.has_lost?
+      puts "=============COMPUTER BOARD============="
+      puts "#{@computer_board.render}"
+      puts "==============PLAYER BOARD=============="
+      puts "#{@human_board.render(true)}"
       p "Computer won!"
-      sleep(2.0)
+      sleep(5.0)
       self.start
     else
       new_turn
@@ -130,9 +137,26 @@ class Game
   def computer_place_ships
     computer_cruiser = Ship.new("Cruiser", 3)
     computer_submarine = Ship.new("Submarine", 2)
-
-    # sub_coords =
-    @computer_board.place(computer_cruiser, ["A1", "A2", "A3"])
-    @computer_board.place(computer_submarine, ["C1", "C2"])
+    loop do
+      cruiser_coords = []
+      until cruiser_coords.length == computer_cruiser.length do
+        cruiser_coords << @computer_board.cells.keys.sample
+      end
+      if @computer_board.valid_placement?(computer_cruiser, cruiser_coords)
+        @computer_board.place(computer_cruiser, cruiser_coords)
+        break
+      end
+    end
+    loop do
+      submarine_coords = []
+      until submarine_coords.length == computer_submarine.length do
+        submarine_coords << @computer_board.cells.keys.sample
+      end
+      if @computer_board.valid_placement?(computer_submarine, submarine_coords)
+        @computer_board.place(computer_submarine, submarine_coords)
+        break
+      end
+    end
   end
+
 end
