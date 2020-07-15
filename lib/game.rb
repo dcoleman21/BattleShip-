@@ -123,7 +123,26 @@ class Game
     puts "Enter coordinate to fire upon"
     player_input = gets.chomp
     turn.human_shot(player_input)
-    # require "pry"; binding.pry
+    #computer shot = H is not rendering to the board
+    #ships sunk is not ending the game
+    
+  #   @computer_ships_sunk += turn.computer_ships_sunk
+  #   @player_ships_sunk += turn.player_ships_sunk
+  #   sleep(0.8)
+  #   if computer_ships_sunk?
+  #     p "You won!"
+  #     turn.display_boards(computer, human)
+  #     break
+  #   elsif player_ships_sunk?
+  #     p "Computer won!"
+  #     turn.display_boards(computer, human)
+  #     break
+  #   else
+  #     new_turn
+  #   end
+  # end
+
+
 
     if @computer_ships_sunk == 2 || @human_ships_sunk == 2
        return
