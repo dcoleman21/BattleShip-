@@ -34,9 +34,11 @@ class Turn
             end
             break
           end
+        elsif computer.board.valid_coordinate?(player_input) == false
+          puts "That is not a valid coordinate. Please try again:"
+          break
         end
       end
-      puts "That is not a valid coordinate. Please try again:"
     end
   end
 
