@@ -16,8 +16,8 @@ class Game
     @human_player = human
     @computer_ships_sunk = 0
     @human_ships_sunk = 0
-    @computer_board = Board.new
-    @human_board = Board.new
+    @computer_board = @computer_player.board
+    @human_board = @human_player.board
   end
 
   def start
@@ -36,7 +36,8 @@ class Game
 
     input = gets.chomp
     if input == 'p'
-      #call computer place methods here
+      computer_place_ships
+
       #computer places ship then human will place theirs
 
     system "clear"
@@ -119,7 +120,10 @@ class Game
     puts "#{@human_board.render(true)}"
     # turn.display_boards(computer_player, human_player)
     turn.computer_shot
-    turn.human_shot
+    puts "Enter coordinate to fire upon"
+    player_input = gets.chomp
+    turn.human_shot(player_input)
+    # require "pry"; binding.pry
 
     if @computer_ships_sunk == 2 || @human_ships_sunk == 2
        return
@@ -128,13 +132,16 @@ class Game
     end
   end
 
-  # def computer_place_ship_cruiser
-  #
-  # end
-  #
-  # def computer_place_ship_submarine
-  #
-  # end
+  def computer_place_ships
+    computer_cruiser = Ship.new("Cruiser", 3)
+    computer_submarine = Ship.new("Submarine", 2)
+
+    @computer_board.place(computer_cruiser, ["A1", "A2", "A3"])
+    @computer_board.place(computer_submarine, ["C1", "C2"])
+
+    # require "pry"; binding.pry
+  end
+
 
 end
 computer_cruiser = Ship.new("Cruiser", 3)
