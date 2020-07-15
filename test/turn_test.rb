@@ -27,11 +27,23 @@ class TurnTest < Minitest::Test
     assert_equal 0, turn.human_ships_sunk
   end
 
+  def test_human_can_hit_a_ship
+    computer = Player.new("Computer")
+    human = Player.new("Human")
+    turn = Turn.new(computer, human)
+    cruiser = Ship.new("Cruiser", 3)
+
+    computer.board.place(cruiser, ["A1", "A2", "A3"])
+    # require "pry"; binding.pry
+    turn.human_shot("A1")
+  end
+
   def test_human_can_take_a_shot
     computer = Player.new("Computer")
     human = Player.new("Human")
     turn = Turn.new(computer, human)
-    turn.human_shot
+    turn.human_shot("A1")
+
   end
 
   def test_computer_can_take_a_shot
